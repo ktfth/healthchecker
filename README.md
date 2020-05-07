@@ -9,3 +9,13 @@ Simple http healthchecker
 ```
 [sudo] npm i -g healthchecker
 ```
+
+## Usage
+
+```
+healthchecker http://www.google.com
+```
+
+```
+healthchecker http://www.google.com --continue
+```
