@@ -1,23 +1,16 @@
 #!/usr/bin/env node
 'use strict';
 
-const http = require('http');
-
+const got = require('got');
 const args = process.argv.slice(2);
 
-function requestClient(url='', c=false) {
-  const agent = new http.Agent({ keepAlive: true });
-  const req = http
-    .get(url, { agent }, res => {
-      console.log(`Status: ${res.statusCode}`);
-      if (!c) process.exit(0);
-    })
-    .on('error', (err) => {
-      console.log(err);
-      if (!c) process.exit(1);
-    });
-
-    return req;
+async function requestClient(url='', c=false) {
+  try {
+    const response = await got(args[0]);
+    console.log('Status: ', response.statusCode);
+  } catch (e) {
+    console.log(e.response.body);
+  }
 }
 
 if (args.length === 1) {
